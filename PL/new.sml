@@ -52,26 +52,26 @@ fun savethecat file =
 				val	y = Cmap.find(time_array, (i,j))
 			in
 				case c of #"R" =>
-					if j<=m andalso valOf(x) = #"." then  update_c(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array, (i,j),t),pf(cats,i,j,t+1),water,i,j-2,#"L",t,n,m,cats_num+1,water_num,water_prev)
-					else if j<=m andalso is_cat(valOf(x)) andalso valOf(y) = t then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array, (i,j),t),cats,water,i,j-2,#"L",t,n,m,cats_num,water_num,water_prev)
-				else update_c(arr,time_array,cats,water,i,j-2,#"L",t,n,m,cats_num,water_num,water_prev)
+					if j<=m then if valOf(Cmap.find(arr,(i,j))) = #"." then  update_c(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array, (i,j),t),pf(cats,i,j,t+1),water,i,j-2,#"L",t,n,m,cats_num+1,water_num,water_prev)
+					else if j<=m then if is_cat(valOf(Cmap.find(arr,(i,j)))) andalso valOf(Cmap.find(time_array, (i,j))) = t then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array, (i,j),t),cats,water,i,j-2,#"L",t,n,m,cats_num,water_num,water_prev)
+					else update_c(arr,time_array,cats,water,i,j-2,#"L",t,n,m,cats_num,water_num,water_prev)
 				| #"L" =>
-					if j>=0 andalso valOf(x) = #"." then update_c(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array, (i,j),t),pf(cats,i,j,t+1),water,i+1,j+1,#"U",t,n,m,cats_num+1,water_num,water_prev)
-					else if j>=0 andalso is_cat(valOf(x)) andalso valOf(y) = t then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array, (i,j), t+1),cats,water,i+1,j+1,#"U",t,n,m,cats_num,water_num,water_prev)
+					if j>=0 then if valOf(Cmap.find(arr,(i,j))) = #"." then update_c(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array, (i,j),t),pf(cats,i,j,t+1),water,i+1,j+1,#"U",t,n,m,cats_num+1,water_num,water_prev)
+					else if j>=0 then if is_cat(valOf(Cmap.find(arr,(i,j)))) andalso valOf(Cmap.find(time_array, (i,j))) = t then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array, (i,j), t+1),cats,water,i+1,j+1,#"U",t,n,m,cats_num,water_num,water_prev)
 					else update_c(arr,time_array,cats,water,i+1,j+1,#"U",t,n,m,cats_num,water_num,water_prev)
 				| #"U" =>
-					if i<=n andalso valOf(x) = #"." then update_c(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array, (i,j),t),pf(cats,i,j,t+1),water,i-2,j,#"D",t,n,m,cats_num+1,water_num,water_prev)
-					else if i<=n andalso is_cat(valOf(x)) andalso valOf(y) = t then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array, (i,j),t),cats,water,i-2,j,#"D",t,n,m,cats_num,water_num,water_prev)
-					else print("U\n") (*update_c(arr,time_array,cats,water,i-2,j,#"D",t,n,m,cats_num,water_num,water_prev)*)
+					if i<=n then if valOf(Cmap.find(arr,(i,j))) = #"." then update_c(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array, (i,j),t),pf(cats,i,j,t+1),water,i-2,j,#"D",t,n,m,cats_num+1,water_num,water_prev)
+					else if i<=n then if is_cat(valOf(x)) andalso valOf(Cmap.find(time_array, (i,j))) = t then update_c(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array, (i,j),t),cats,water,i-2,j,#"D",t,n,m,cats_num,water_num,water_prev)
+					else update_c(arr,time_array,cats,water,i-2,j,#"D",t,n,m,cats_num,water_num,water_prev)
 				| #"D" =>
-					if i>=0 andalso valOf(x) = #"." then update_cat(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array, (i,j),t),pf(cats,i,j,t+1),water,t,n,m,cats_num+1,water_num,water_prev)
-					else if i>=0 andalso is_cat(valOf(x)) andalso valOf(y) = t then update_cat(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array, (i,j),t),cats,water,t,n,m,cats_num,water_num,water_prev)
+					if i>=0 andalso valOf(Cmap.find(arr,(i,j))) = #"." then update_cat(Cmap.insert(arr,(i,j),c),Cmap.insert(time_array, (i,j),t),pf(cats,i,j,t+1),water,t,n,m,cats_num+1,water_num,water_prev)
+					else if i>=0 andalso is_cat(valOf(Cmap.find(arr,(i,j)))) andalso valOf(Cmap.find(time_array, (i,j))) = t then update_cat(Cmap.insert(arr,(i,j),conflict(c,valOf(x))),Cmap.insert(time_array, (i,j),t),cats,water,t,n,m,cats_num,water_num,water_prev)
 					else update_cat(arr,time_array,cats,water,t,n,m,cats_num,water_num,water_prev)
 			end
 
 		and update_cat (arr,time_array,cats,water,t,n,m,cats_num,water_num,water_prev) =
 			if Queue.isEmpty(cats) then print(Int.toString(14)) (*update_water(arr,time_array,cats,water,t,n,m,cats_num,water_num,water_prev)*)
-			else if cats_num = 5 then
+			else if cats_num = 3 then
 			let
 					val (i,j,time) = Queue.dequeue(cats)
 					val (ii,jj,tt) = Queue.dequeue(cats)
