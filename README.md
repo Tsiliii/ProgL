@@ -1,2 +1,2 @@
 # ProgL
-ΓΙΩΡΓΟ EAT SHIT
+2019 Programming Languages Course Exercises
